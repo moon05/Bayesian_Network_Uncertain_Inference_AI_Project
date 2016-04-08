@@ -1,4 +1,5 @@
 import os
+from decimal import *
 
 variablesDict = {}
 ListDefinitions = {}
@@ -54,19 +55,41 @@ def parser(filename):
 			continue
 
 		if "<FOR>" in line:
-			print "Collectiing table"
+			print "Collecting table"
 			a = line
 			print a
 			var = line.strip()
 			print var
-			query = var.replace("<FOR>",""),replace("</FOR>","")
-			print query
+			map_entry = var.replace("<FOR>","").replace("</FOR>","")
+			print map_entry
+			
+			while "<GIVEN>" in peek(foo):
+				line = foo.readline()
+				var = line.strip()
+				given = var.replace("<GIVEN>","").replace("</GIVEN>","")
+				map_entry = map_entry + " " +given
+				#map_entry has been updated
+
+
+
+			if "<TABLE>" in peek(foo):
+				line = foo.readline()
+				var = line.strip()
+				table = var.replace("<TABLE>","").replace("</TABLE>","")
+				print table
+				table = table.split()
+				print table
+				for n in range(len(table)):
+					table[n] = float(table[n])
+				print table
+				ListDefinitions[map_entry] = table
 
 
 
 
 
 	print variablesDict
+	print ListDefinitions
 
 currentPath = os.getcwd()
 parser(currentPath+'/'+"aima-alarm.xml")
