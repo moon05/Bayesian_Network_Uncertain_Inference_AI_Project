@@ -4,6 +4,7 @@ import re
 variablesDict = {}
 ListDefinitions = {}
 maxVarNum = 0
+
 # [{'A':[[.011,.99]]}, {'B':[[1223,123213]]}, {(A|B,E):[[0.95 ,0.05],[0.94,0.06],[0.29 ,0.71],[0.001,0.999]]}]
 #
 
@@ -65,6 +66,9 @@ def parser(filename):
 		if "<DEFINITION" in line:
 			continue
 
+		#calculating maxVarNum
+		maxTracker(variablesDict)
+
 		if "<FOR>" in line:
 			# print "Collecting table"
 			map_entry = trim(line, "FOR")
@@ -87,8 +91,8 @@ def parser(filename):
 					ListDefinitions[map_entry] = list()
 					for n in range(len(table)):
 						table[n] = float(table[n])
-					ListDefinitions[map_entry].append(table)
-					print ListDefinitions[map_entry]
+					for n in range(0,len(table),maxVarNum):
+						ListDefinitions[map_entry].append(table[n:n+maxVarNum])
 				
 				elif "<TABLE>" in peek(foo):
 					print "inside table"
