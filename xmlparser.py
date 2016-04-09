@@ -36,9 +36,7 @@ def parser(filename):
 		if "<NAME>" in line:
 			print "Collecting variable names"
 			a = line
-			print a
 			var = line.strip()
-			print var
 			name = var.replace("<NAME>","").replace("</NAME>","")
 			print name
 			variablesDict[name] = []
@@ -63,26 +61,50 @@ def parser(filename):
 			map_entry = var.replace("<FOR>","").replace("</FOR>","")
 			print map_entry
 			
-			while "<GIVEN>" in peek(foo):
-				line = foo.readline()
-				var = line.strip()
-				given = var.replace("<GIVEN>","").replace("</GIVEN>","")
-				map_entry = map_entry + " " +given
+			if "<GIVEN>" in peek(foo):
+				while "<GIVEN>" in peek(foo):
+					line = foo.readline()
+					var = line.strip()
+					given = var.replace("<GIVEN>","").replace("</GIVEN>","")
+					map_entry = map_entry + " " + given
 				#map_entry has been updated
 
+				if "<TABLE>" in peek(foo):
+					line = foo.readline()
+					ListDefinitions[map_entry] = list()
+					while "</TABLE>" not in peek(foo):
+						line = foo.readline()
+						var = line.strip()
+						var = var.split("-->",1)[1]
+						table = var.split()
+						
+						print table
+						if not table:
+							continue
+						else:
+							print "Printing ListDefinitions"
+							print ListDefinitions[map_entry]
+							for n in range(len(table)):
+								print "Entering in tablemaker"
+								table[n] = float(table[n])
+							print table
+							ListDefinitions[map_entry].append(table)
+							print ListDefinitions[map_entry]
 
-
-			if "<TABLE>" in peek(foo):
+			elif "<TABLE>" in peek(foo):
 				line = foo.readline()
 				var = line.strip()
 				table = var.replace("<TABLE>","").replace("</TABLE>","")
 				print table
 				table = table.split()
+				ListDefinitions[map_entry] = list()
 				print table
 				for n in range(len(table)):
 					table[n] = float(table[n])
 				print table
-				ListDefinitions[map_entry] = table
+				print map_entry
+				ListDefinitions[map_entry].append(table)
+				print ListDefinitions[map_entry]
 
 
 
