@@ -1,4 +1,4 @@
-import sys
+import os
 import re
 
 variablesDict = {}
@@ -38,7 +38,10 @@ def parser(filename):
 		if ("</BIF>" in line):
 			break
 
-		if "<VARIABLE>" in line:
+		if "<!-- Variables -->" in line:
+			continue
+
+		if "<VARIABLE" in line:
 			continue
 
 		if "<NAME>" in line:
@@ -52,8 +55,7 @@ def parser(filename):
 				# print outcome
 				variablesDict[name].append(outcome)
 			print variablesDict[name]
-			
-		if "<DEFINITION>" in line:
+		if "<DEFINITION" in line:
 			continue
 
 		if "<FOR>" in line:
@@ -63,11 +65,26 @@ def parser(filename):
 			
 			if "<GIVEN>" in peek(foo):
 				while "<GIVEN>" in peek(foo):
-					given = trim(foo.readline(), "GIVEN")
+					line = foo.readline()
+					given = trim(line, "GIVEN")
 					map_entry = map_entry + " " + given
 				#map_entry has been updated
 				print map_entry
-				if "<TABLE>" in peek(foo):
+				if "<TABLE>" and "</TABLE>" in peek(foo):
+					print "inside both"
+					line = foo.readline()
+					ListDefinitions[map_entry] = list()
+					table = trim(line, "TABLE")
+					table = table.split()
+					print table
+					ListDefinitions[map_entry] = list()
+					for n in range(len(table)):
+						table[n] = float(table[n])
+					ListDefinitions[map_entry].append(table)
+					print ListDefinitions[map_entry]
+				
+				elif "<TABLE>" in peek(foo):
+					print "inside table"
 					line = foo.readline()
 					ListDefinitions[map_entry] = list()
 					while "</TABLE>" not in peek(foo):
@@ -77,11 +94,12 @@ def parser(filename):
 						if not table:
 							continue
 						else:
-							for n in range(len(table)):
+							for n in range(len(table)):	
 								table[n] = float(table[n])
 							# print table
 							ListDefinitions[map_entry].append(table)
 							print ListDefinitions[map_entry]
+
 
 			elif "<TABLE>" in peek(foo):
 				table = trim(foo.readline(), "TABLE")
