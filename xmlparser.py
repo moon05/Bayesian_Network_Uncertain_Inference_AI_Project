@@ -3,9 +3,16 @@ import re
 
 variablesDict = {}
 ListDefinitions = {}
-
+maxVarNum = 0
 # [{'A':[[.011,.99]]}, {'B':[[1223,123213]]}, {(A|B,E):[[0.95 ,0.05],[0.94,0.06],[0.29 ,0.71],[0.001,0.999]]}]
 #
+
+#to find out whats the maximum number of values any variable has
+def maxTracker(varDict):
+	global maxVarNum
+	for n in varDict:
+		if len(varDict[n]) > maxVarNum:
+			maxVarNum = len(varDict[n])
 
 #replaces all the comments if any present
 def replace_comments(line):
