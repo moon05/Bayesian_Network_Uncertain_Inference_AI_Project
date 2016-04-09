@@ -7,7 +7,17 @@ ListDefinitions = {}
 # [{'A':[[.011,.99]]}, {'B':[[1223,123213]]}, {(A|B,E):[[0.95 ,0.05],[0.94,0.06],[0.29 ,0.71],[0.001,0.999]]}]
 #
 
+def replace_comments(line):
+	return re.sub("<!--[\w\s]+-->", "", line)
 
+def trim(line, delim):
+	line = line.strip()
+	line = replace_comments(line)
+	left = "<" + delim + ">"
+	right = "</" + delim + ">"
+	line = line.replace(left, "").replace(right, "")
+	return line
+	
 def peek(f):
     pos = f.tell()
     line = f.readline()
@@ -35,16 +45,11 @@ def parser(filename):
 
 		if "<NAME>" in line:
 			print "Collecting variable names"
-			a = line
-			var = line.strip()
-			name = var.replace("<NAME>","").replace("</NAME>","")
-			print name
+			name = trim(foo.readline(), "NAME")
 			variablesDict[name] = []
 			while "<OUTCOME>" in peek(foo):
 				print "Collecting values"
-				line = foo.readline()
-				var = line.strip()
-				outcome = var.replace("<OUTCOME>","").replace("</OUTCOME>","")
+				outcome = trim(foo.readline(), "OUTCOME")
 				print outcome
 				variablesDict[name].append(outcome)
 
@@ -54,18 +59,12 @@ def parser(filename):
 
 		if "<FOR>" in line:
 			print "Collecting table"
-			a = line
-			print a
-			var = line.strip()
-			print var
-			map_entry = var.replace("<FOR>","").replace("</FOR>","")
+			map_entry = trim(line, "FOR")
 			print map_entry
 			
 			if "<GIVEN>" in peek(foo):
 				while "<GIVEN>" in peek(foo):
-					line = foo.readline()
-					var = line.strip()
-					given = var.replace("<GIVEN>","").replace("</GIVEN>","")
+					given = trim(foo.readline(), "GIVEN")
 					map_entry = map_entry + " " + given
 				#map_entry has been updated
 
@@ -74,10 +73,8 @@ def parser(filename):
 					ListDefinitions[map_entry] = list()
 					while "</TABLE>" not in peek(foo):
 						line = foo.readline()
-						var = line.strip()
-						var = var.split("-->",1)[1]
+						var = replace_comments(line).strip()
 						table = var.split()
-						
 						print table
 						if not table:
 							continue
@@ -92,9 +89,7 @@ def parser(filename):
 							print ListDefinitions[map_entry]
 
 			elif "<TABLE>" in peek(foo):
-				line = foo.readline()
-				var = line.strip()
-				table = var.replace("<TABLE>","").replace("</TABLE>","")
+				table = trim(foo.readLine(), "TABLE")
 				print table
 				table = table.split()
 				ListDefinitions[map_entry] = list()
@@ -112,6 +107,6 @@ def parser(filename):
 
 	print variablesDict
 	print ListDefinitions
-
+	
 currentPath = os.getcwd()
 parser(currentPath+'/'+"aima-alarm.xml")
