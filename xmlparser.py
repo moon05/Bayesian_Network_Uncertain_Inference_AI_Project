@@ -1,4 +1,5 @@
 import sys
+import os
 import re
 
 vars_dict = {}
@@ -24,6 +25,21 @@ def peek(f):
     f.seek(pos)
     return line
 
+#adds a input to the definitions dictionary
+def add_to_defs(line, given, map_entry):
+	num_values = len(vars_dict[given])
+	if line != "":
+		table = line.split()
+		length = len(table)
+		i = 0
+		while i < length:
+			new_table = []
+			for j in range(num_values):
+				new_table.append(float(table[i + j]))
+			defs_dict[map_entry].append(new_table)
+			i += num_values
+
+#parses input from an xml file
 def parser(filename):
 	foo = open(filename, "r")
 	print "Name of file: " + filename
@@ -52,7 +68,8 @@ def parser(filename):
 		if "<DEFINITION>" in line:
 			line = foo.readline()
 			if "<FOR>" in line:
-				map_entry = trim(line, "FOR")
+				given = trim(line, "FOR")
+				map_entry = given
 				while "<GIVEN>" in peek(foo):
 					given = trim(foo.readline(), "GIVEN")
 					map_entry = map_entry + " " + given
@@ -61,18 +78,10 @@ def parser(filename):
 					line = foo.readline().replace("<TABLE>", "")
 					while "</TABLE>" not in line:
 						line = replace_comments(line).strip()
-						if line != "":
-							table = line.split()
-							for i in range(len(table)):
-								table[i] = float(table[i])
-							defs_dict[map_entry].append(table)
+						add_to_defs(line, given, map_entry)
 						line = foo.readline()
 					line = replace_comments(line).strip().replace("</TABLE>", "")
-					if line != "":
-						table = line.split()
-						for i in range (len(table)):
-							table[i] = float(table[i])
-						defs_dict[map_entry].append(table)
+					add_to_defs(line, given, map_entry)
 	
 	print "Variables Dictionary:"
 	for entry in vars_dict:
@@ -83,9 +92,14 @@ def parser(filename):
 	for entry in defs_dict:
 		print("%s: %s" % (entry, defs_dict[entry]))
 	print
-	
+
+#main routine
 if len(sys.argv) != 2:
 	print "Usage: xmlparser.py <filename>"
+	exit(-1)
+
+if not os.path.exists(sys.argv[1]):
+	print "Error: File not found"
 	exit(-1)
 
 parser(sys.argv[1])
