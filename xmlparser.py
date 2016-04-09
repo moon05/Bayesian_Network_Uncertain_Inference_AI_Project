@@ -1,4 +1,5 @@
 import os
+import re
 from decimal import *
 
 variablesDict = {}
@@ -7,9 +8,11 @@ ListDefinitions = {}
 # [{'A':[[.011,.99]]}, {'B':[[1223,123213]]}, {(A|B,E):[[0.95 ,0.05],[0.94,0.06],[0.29 ,0.71],[0.001,0.999]]}]
 #
 
+#replaces all the comments if any present
 def replace_comments(line):
-	return re.sub("<!--[\w\s]+-->", "", line)
+	return re.sub("<!--[\w\s!]+-->", "", line)
 
+#trims the tags
 def trim(line, delim):
 	line = line.strip()
 	line = replace_comments(line)
@@ -18,6 +21,7 @@ def trim(line, delim):
 	line = line.replace(left, "").replace(right, "")
 	return line
 	
+#looks at the upcoming line instead of actually reading it
 def peek(f):
     pos = f.tell()
     line = f.readline()
@@ -67,13 +71,15 @@ def parser(filename):
 					given = trim(foo.readline(), "GIVEN")
 					map_entry = map_entry + " " + given
 				#map_entry has been updated
-
+				print map_entry
 				if "<TABLE>" in peek(foo):
 					line = foo.readline()
 					ListDefinitions[map_entry] = list()
 					while "</TABLE>" not in peek(foo):
 						line = foo.readline()
+						print line
 						var = replace_comments(line).strip()
+						print var
 						table = var.split()
 						print table
 						if not table:
@@ -89,7 +95,7 @@ def parser(filename):
 							print ListDefinitions[map_entry]
 
 			elif "<TABLE>" in peek(foo):
-				table = trim(foo.readLine(), "TABLE")
+				table = trim(foo.readline(), "TABLE")
 				print table
 				table = table.split()
 				ListDefinitions[map_entry] = list()
