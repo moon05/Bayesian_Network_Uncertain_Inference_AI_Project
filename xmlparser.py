@@ -26,8 +26,8 @@ def peek(f):
     return line
 
 #adds a input to the definitions dictionary
-def add_to_defs(line, given, map_entry):
-	num_values = len(vars_dict[given])
+def add_to_defs(line, query, map_entry):
+	num_values = len(vars_dict[query])
 	if line != "":
 		table = line.split()
 		length = len(table)
@@ -38,6 +38,28 @@ def add_to_defs(line, given, map_entry):
 				new_table.append(float(table[i + j]))
 			defs_dict[map_entry].append(new_table)
 			i += num_values
+
+#creates a string of the definitions dictionary with elements separated by line
+def defs_dict_tostring(entry):
+	length = len(defs_dict[entry])
+	string = ""
+	for element in defs_dict[entry]:
+		string += str(element) + "\n"
+	return string
+
+#prints variables dictionary
+def print_vars():
+	print "Variables Dictionary:"
+	for entry in vars_dict:
+		print("%s: %s" % (entry, vars_dict[entry]))
+	print
+
+#prints definitions dictionary
+def print_defs():
+	print "Definitions Dictionary:"
+	for entry in defs_dict:
+		print("P(%s):\n%s" % (entry, defs_dict_tostring(entry)))
+	print
 
 #parses input from an xml file
 def parser(filename):
@@ -69,31 +91,26 @@ def parser(filename):
 		if "<DEFINITION>" in line:
 			line = foo.readline()
 			if "<FOR>" in line:
-				given = trim(line, "FOR")
-				map_entry = given
-				while "<GIVEN>" in peek(foo):
-					line = foo.readline()
-					given = trim(line, "GIVEN")
-					map_entry = map_entry + " " + given
-				defs_dict[map_entry] = []
-				if "<TABLE>" in peek(foo):
-					line = foo.readline().replace("<TABLE>", "")
-					while "</TABLE>" not in line:
-						line = replace_comments(line).strip()
-						add_to_defs(line, given, map_entry)
+				query = trim(line, "FOR")
+				map_entry = query
+				if "<GIVEN>" in peek(foo):
+					map_entry += " | "
+					while "<GIVEN>" in peek(foo):
 						line = foo.readline()
-					line = replace_comments(line).strip().replace("</TABLE>", "")
-					add_to_defs(line, given, map_entry)
-	
-	print "Variables Dictionary:"
-	for entry in vars_dict:
-		print("%s: %s" % (entry, vars_dict[entry]))
-	print
-	
-	print "Definitions Dictionary:"
-	for entry in defs_dict:
-		print("%s: %s" % (entry, defs_dict[entry]))
-	print
+						given = trim(line, "GIVEN")
+						map_entry = map_entry + given + ", "
+					map_entry = map_entry[0:-2]
+					defs_dict[map_entry] = []
+					if "<TABLE>" in peek(foo):
+						line = foo.readline().replace("<TABLE>", "")
+						while "</TABLE>" not in line:
+							line = replace_comments(line).strip()
+							add_to_defs(line, query, map_entry)
+							line = foo.readline()
+						line = replace_comments(line).strip().replace("</TABLE>", "")
+						add_to_defs(line, query, map_entry)
+	print_vars()
+	print_defs()
 
 #main routine
 if len(sys.argv) != 2:
