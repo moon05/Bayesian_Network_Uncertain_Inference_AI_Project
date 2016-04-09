@@ -1,4 +1,4 @@
-import os
+import sys
 import re
 
 variablesDict = {}
@@ -32,16 +32,13 @@ def parser(filename):
 	print "Name of file: " + filename
 
 	while "<!-- Variables -->" not in foo.readline():
-		foo.readline()
+		pass
 	while True:
 		line = foo.readline()
 		if ("</BIF>" in line):
 			break
 
-		if "<!-- Variables -->" in line:
-			continue
-
-		if "<VARIABLE" in line:
+		if "<VARIABLE>" in line:
 			continue
 
 		if "<NAME>" in line:
@@ -55,7 +52,8 @@ def parser(filename):
 				# print outcome
 				variablesDict[name].append(outcome)
 			print variablesDict[name]
-		if "<DEFINITION" in line:
+			
+		if "<DEFINITION>" in line:
 			continue
 
 		if "<FOR>" in line:
@@ -98,5 +96,8 @@ def parser(filename):
 	print variablesDict
 	print ListDefinitions
 	
-currentPath = os.getcwd()
-parser(currentPath+'/'+"aima-alarm.xml")
+if len(sys.argv) != 2:
+	print "Usage: xmlparser.py <filename>"
+	exit(-1)
+
+parser(sys.argv[1])
