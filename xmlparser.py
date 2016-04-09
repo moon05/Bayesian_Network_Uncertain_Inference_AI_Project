@@ -1,6 +1,5 @@
 import os
 import re
-from decimal import *
 
 variablesDict = {}
 ListDefinitions = {}
@@ -40,31 +39,29 @@ def parser(filename):
 			break
 
 		if "<!-- Variables -->" in line:
-			print "First Variables comment found"
 			continue
 
 		if "<VARIABLE" in line:
-			print "Passed the variable tag"
 			continue
 
 		if "<NAME>" in line:
 			print "Collecting variable names"
-			name = trim(foo.readline(), "NAME")
+			name = trim(line, "NAME")
+			print name
 			variablesDict[name] = []
 			while "<OUTCOME>" in peek(foo):
-				print "Collecting values"
+				# print "Collecting values"
 				outcome = trim(foo.readline(), "OUTCOME")
-				print outcome
+				# print outcome
 				variablesDict[name].append(outcome)
-
+			print variablesDict[name]
 		if "<DEFINITION" in line:
-			print "Passed the variable tag"
 			continue
 
 		if "<FOR>" in line:
-			print "Collecting table"
+			# print "Collecting table"
 			map_entry = trim(line, "FOR")
-			print map_entry
+			# print map_entry
 			
 			if "<GIVEN>" in peek(foo):
 				while "<GIVEN>" in peek(foo):
@@ -77,38 +74,25 @@ def parser(filename):
 					ListDefinitions[map_entry] = list()
 					while "</TABLE>" not in peek(foo):
 						line = foo.readline()
-						print line
 						var = replace_comments(line).strip()
-						print var
 						table = var.split()
-						print table
 						if not table:
 							continue
 						else:
-							print "Printing ListDefinitions"
-							print ListDefinitions[map_entry]
 							for n in range(len(table)):
-								print "Entering in tablemaker"
 								table[n] = float(table[n])
-							print table
+							# print table
 							ListDefinitions[map_entry].append(table)
 							print ListDefinitions[map_entry]
 
 			elif "<TABLE>" in peek(foo):
 				table = trim(foo.readline(), "TABLE")
-				print table
 				table = table.split()
 				ListDefinitions[map_entry] = list()
-				print table
 				for n in range(len(table)):
 					table[n] = float(table[n])
-				print table
-				print map_entry
 				ListDefinitions[map_entry].append(table)
 				print ListDefinitions[map_entry]
-
-
-
 
 
 	print variablesDict
