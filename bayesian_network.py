@@ -1,6 +1,3 @@
-import sys
-import xmlparser
-
 vars_dict = {}
 defs_dict = {}
 
@@ -25,15 +22,3 @@ def print_defs():
 	for entry in defs_dict:
 		print("P(%s):\n%s" % (entry, defs_dict_tostring(entry)))
 	print
-	
-#main routine
-if len(sys.argv) != 2:
-	print "Usage: bayesian_network.py <filename>"
-	exit(-1)
-	
-bn = xmlparser.parse(sys.argv[1])
-vars_dict = bn[0]
-defs_dict = bn[1]
-
-print_vars()
-print_defs()

@@ -15,7 +15,7 @@ def trim(line, delim):
 	return line
 	
 #looks at the upcoming line instead of actually reading it
-def peek(f):
+def peek_line(f):
     pos = f.tell()
     line = f.readline()
     f.seek(pos)
@@ -38,20 +38,19 @@ def add_to_defs(line, query, map_entry, vars_dict, defs_dict):
 #parses input from an xml file
 def parse(filename):
 	if not os.path.exists(filename):
-		print "Error: File not found"
 		return ({}, {})
-		
-	foo = open(filename, "r")
-	print "Name of file: " + filename
-	print
 
 	vars_dict = {}
 	defs_dict = {}
 	
-	#var loop
+	foo = open(filename, "r")
+	print "Name of file: " + filename
+	print
+	
+	#variable loop
 	while True:
 		line = foo.readline()
-		if ("<DEFINITION>" in line):
+		if "<DEFINITION>" in line:
 			break
 		
 		if "<VARIABLE" in line:
@@ -59,7 +58,7 @@ def parse(filename):
 			if "<NAME>" in line:
 				name = trim(line, "NAME")
 				vars_dict[name] = []
-				while "<OUTCOME>" in peek(foo):
+				while "<OUTCOME>" in peek_line(foo):
 					outcome = trim(foo.readline(), "OUTCOME")
 					vars_dict[name].append(outcome)
 	
@@ -74,15 +73,15 @@ def parse(filename):
 			if "<FOR>" in line:
 				query = trim(line, "FOR")
 				map_entry = query
-				if "<GIVEN>" in peek(foo):
+				if "<GIVEN>" in peek_line(foo):
 					map_entry += " | "
-					while "<GIVEN>" in peek(foo):
+					while "<GIVEN>" in peek_line(foo):
 						line = foo.readline()
 						given = trim(line, "GIVEN")
 						map_entry = map_entry + given + ", "
 					map_entry = map_entry[0:-2]
 					defs_dict[map_entry] = []
-					if "<TABLE>" in peek(foo):
+					if "<TABLE>" in peek_line(foo):
 						line = foo.readline().replace("<TABLE>", "")
 						while "</TABLE>" not in line:
 							line = replace_comments(line).strip()
