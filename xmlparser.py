@@ -1,9 +1,5 @@
-import sys
 import os
 import re
-
-vars_dict = {}
-defs_dict = {}
 
 #replaces all the comments if any present
 def replace_comments(line):
@@ -26,7 +22,7 @@ def peek(f):
     return line
 
 #adds a input to the definitions dictionary
-def add_to_defs(line, query, map_entry):
+def add_to_defs(line, query, map_entry, vars_dict, defs_dict):
 	num_values = len(vars_dict[query])
 	if line != "":
 		table = line.split()
@@ -39,34 +35,19 @@ def add_to_defs(line, query, map_entry):
 			defs_dict[map_entry].append(new_table)
 			i += num_values
 
-#creates a string of the definitions dictionary with elements separated by line
-def defs_dict_tostring(entry):
-	length = len(defs_dict[entry])
-	string = ""
-	for element in defs_dict[entry]:
-		string += str(element) + "\n"
-	return string
-
-#prints variables dictionary
-def print_vars():
-	print "Variables Dictionary:"
-	for entry in vars_dict:
-		print("%s: %s" % (entry, vars_dict[entry]))
-	print
-
-#prints definitions dictionary
-def print_defs():
-	print "Definitions Dictionary:"
-	for entry in defs_dict:
-		print("P(%s):\n%s" % (entry, defs_dict_tostring(entry)))
-	print
-
 #parses input from an xml file
-def parser(filename):
+def parse(filename):
+	if not os.path.exists(filename):
+		print "Error: File not found"
+		return ({}, {})
+		
 	foo = open(filename, "r")
 	print "Name of file: " + filename
 	print
 
+	vars_dict = {}
+	defs_dict = {}
+	
 	#var loop
 	while True:
 		line = foo.readline()
@@ -105,20 +86,8 @@ def parser(filename):
 						line = foo.readline().replace("<TABLE>", "")
 						while "</TABLE>" not in line:
 							line = replace_comments(line).strip()
-							add_to_defs(line, query, map_entry)
+							add_to_defs(line, query, map_entry, vars_dict, defs_dict)
 							line = foo.readline()
 						line = replace_comments(line).strip().replace("</TABLE>", "")
-						add_to_defs(line, query, map_entry)
-	print_vars()
-	print_defs()
-
-#main routine
-if len(sys.argv) != 2:
-	print "Usage: xmlparser.py <filename>"
-	exit(-1)
-
-if not os.path.exists(sys.argv[1]):
-	print "Error: File not found"
-	exit(-1)
-
-parser(sys.argv[1])
+						add_to_defs(line, query, map_entry, vars_dict, defs_dict)
+	return (vars_dict, defs_dict)
