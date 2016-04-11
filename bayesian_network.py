@@ -1,5 +1,14 @@
 vars_dict = {}
 defs_dict = {}
+	
+#returns the probability of the query given a particular assignment
+def P(var, val):
+	index = -1
+	for i in range(len(vars_dict[Y])):
+		if val == vars_dict[Y][i]:
+			index = i
+			break
+	return None
 
 #returns list of parents
 def parents(query):
