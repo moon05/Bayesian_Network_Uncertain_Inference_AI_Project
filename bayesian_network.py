@@ -1,6 +1,23 @@
 vars_dict = {}
 defs_dict = {}
 
+#returns list of parents
+def parents(query):
+	for entry in defs_dict:
+		if entry[0] == query:
+			return entry[1]
+	return None
+
+#creates string to represent probability
+def entry_tostring(entry):
+	length = len(entry[1])
+	string = entry[0]
+	if length > 0:
+		string += " | " + entry[1][0]
+		for i in range(1, length):
+			string += ", " + entry[1][i]
+	return string
+
 #creates a string of the definitions dictionary with elements separated by line
 def defs_dict_tostring(entry):
 	length = len(defs_dict[entry])
@@ -20,5 +37,5 @@ def print_vars():
 def print_defs():
 	print "Definitions Dictionary:"
 	for entry in defs_dict:
-		print("P(%s):\n%s" % (entry, defs_dict_tostring(entry)))
+		print("P(%s):\n%s" % (entry_tostring(entry), defs_dict_tostring(entry)))
 	print

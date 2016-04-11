@@ -49,10 +49,10 @@ def parse(filename):
 	
 	#variable loop
 	while True:
-		line = foo.readline()
-		if "<DEFINITION>" in line:
+		if "<DEFINITION>" in peek_line(foo):
 			break
 		
+		line = foo.readline()
 		if "<VARIABLE" in line:
 			line = foo.readline()
 			if "<NAME>" in line:
@@ -64,29 +64,29 @@ def parse(filename):
 	
 	#definition loop
 	while True:
-		line = foo.readline()
-		if ("</BIF>" in line):
+		if ("</BIF>" in peek_line(foo)):
 			break
 		
+		line = foo.readline()
 		if "<DEFINITION>" in line:
 			line = foo.readline()
 			if "<FOR>" in line:
 				query = trim(line, "FOR")
-				map_entry = query
+				map_entry = [query, []]
 				if "<GIVEN>" in peek_line(foo):
-					map_entry += " | "
 					while "<GIVEN>" in peek_line(foo):
 						line = foo.readline()
 						given = trim(line, "GIVEN")
-						map_entry = map_entry + given + ", "
-					map_entry = map_entry[0:-2]
-					defs_dict[map_entry] = []
-					if "<TABLE>" in peek_line(foo):
-						line = foo.readline().replace("<TABLE>", "")
-						while "</TABLE>" not in line:
-							line = replace_comments(line).strip()
-							add_to_defs(line, query, map_entry, vars_dict, defs_dict)
-							line = foo.readline()
-						line = replace_comments(line).strip().replace("</TABLE>", "")
+						map_entry[1].append(given)
+				map_entry[1] = tuple(map_entry[1])
+				map_entry = tuple(map_entry)
+				defs_dict[map_entry] = []
+				if "<TABLE>" in peek_line(foo):
+					line = foo.readline().replace("<TABLE>", "")
+					while "</TABLE>" not in line:
+						line = replace_comments(line).strip()
 						add_to_defs(line, query, map_entry, vars_dict, defs_dict)
+						line = foo.readline()
+					line = replace_comments(line).strip().replace("</TABLE>", "")
+					add_to_defs(line, query, map_entry, vars_dict, defs_dict)
 	return (vars_dict, defs_dict)
