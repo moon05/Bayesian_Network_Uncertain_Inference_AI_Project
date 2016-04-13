@@ -1,9 +1,17 @@
 import os
 import re
 
+#generates a tuple of the assignments by reading the in line comments
+def get_current_assignment(line):
+	string = re.sub("([\d]+\.[\d]+,[\s]*)+[\d]+\.[\d]+;", "", line).strip()
+	if re.match("\(([\w]+,[\s]*)*[\w]+\)", string) is None:
+		return tuple([])
+	string = re.sub("[\s]+", "", string.lstrip("(").rstrip(")"))
+	return tuple(string.split(","))
+
 #replaces all the comments if any present
 def replace_comments(line):
-	return re.sub("\([\w\s,]+\)", "", line)
+	return re.sub("\(([\w]+,[\s]*)*[\w]+\)", "", line)
 
 #looks at the upcoming line instead of actually reading it
 def peek_line(f):
@@ -53,13 +61,16 @@ def parse(filename):
 			map_entry = [map_entry[0], map_entry[1:]]
 			map_entry[1] = tuple(map_entry[1])
 			map_entry = tuple(map_entry)
-			defs_dict[map_entry] = []
+			defs_dict[map_entry] = {}
 			while "}" not in peek_line(foo):
 				line = foo.readline()
+				assignment = get_current_assignment(line);
 				vals = replace_comments(line).strip()
 				vals = re.sub("table", "", vals).strip()
 				vals = vals.strip(";")
 				vals = vals.split(",")
-				defs_dict[map_entry].append(vals)
+				for i in range(len(vals)):
+					vals[i] = float(vals[i])
+				defs_dict[map_entry][assignment] = vals
 			foo.readline()
 	return (vars_dict, defs_dict)

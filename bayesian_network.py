@@ -2,21 +2,45 @@ vars_dict = {}
 defs_dict = {}
 	
 #returns the probability of the query given a particular assignment
-def P(var, val):
-	index = -1
-	for i in range(len(vars_dict[Y])):
-		if val == vars_dict[Y][i]:
-			index = i
-			break
-	return None
-
+def P(var, e, index):
+	vals = []
+	par = parents(var)
+	for element in e:
+		if element in par:
+			vals.append(e[element])
+	return defs_dict[(var, par)][tuple(vals)][index]
+	
 #returns list of parents
 def parents(query):
 	for entry in defs_dict:
 		if entry[0] == query:
 			return entry[1]
-	return None
-
+	return ()
+	
+#returns a list of variables in sorted topological order
+def topological_sort():
+	vars = vars_dict.keys()
+	order = []
+	i = 0
+	while i < len(vars):
+		if not parents(vars[i]):
+			order.append(vars[i])
+			del vars[i]
+		else:
+			i += 1
+	while vars:
+		temp = []
+		i = 0
+		while i < len(vars):
+			if parents(vars[i])[0] in order:
+				temp.append(vars[i])
+				del vars[i]
+			else:
+				i += 1
+		for element in temp:
+			order.append(element)
+	return order
+	
 #creates string to represent probability
 def entry_tostring(entry):
 	length = len(entry[1])
@@ -28,11 +52,11 @@ def entry_tostring(entry):
 	return string
 
 #creates a string of the definitions dictionary with elements separated by line
-def defs_dict_tostring(entry):
-	length = len(defs_dict[entry])
+def dict_tostring(dict, entry):
+	length = len(dict[entry])
 	string = ""
-	for element in defs_dict[entry]:
-		string += str(element) + "\n"
+	for element in dict[entry]:
+		string += str(element) + ": " + str(dict[entry][element]) + "\n"
 	return string
 
 #prints variables dictionary
@@ -45,6 +69,9 @@ def print_vars():
 #prints definitions dictionary
 def print_defs():
 	print "Definitions Dictionary:"
-	for entry in defs_dict:
-		print("P(%s):\n%s" % (entry_tostring(entry), defs_dict_tostring(entry)))
-	print
+	print_dist_dict(defs_dict)
+
+#prints the distribution for a dictionary of probability
+def print_dist_dict(dict):
+	for entry in dict:
+		print("P(%s):\n%s" % (entry_tostring(entry), dict_tostring(dict, entry)))

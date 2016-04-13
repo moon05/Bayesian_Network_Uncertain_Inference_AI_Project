@@ -21,6 +21,16 @@ def peek_line(f):
     f.seek(pos)
     return line
 
+#generates tuple of the assignments of the current map_entry being added
+def get_current_assignment(map_entry, size, vars_dict):
+	assignment = []
+	length = len(map_entry[1])
+	for i in range(length):
+		pow = 2**(length-i-1)
+		num_values = len(vars_dict[map_entry[1][i]])
+		assignment.append(vars_dict[map_entry[1][i]][size/pow % (num_values)])
+	return tuple(assignment)
+
 #adds a input to the definitions dictionary
 def add_to_defs(line, query, map_entry, vars_dict, defs_dict):
 	num_values = len(vars_dict[query])
@@ -32,7 +42,9 @@ def add_to_defs(line, query, map_entry, vars_dict, defs_dict):
 			new_table = []
 			for j in range(num_values):
 				new_table.append(float(table[i + j]))
-			defs_dict[map_entry].append(new_table)
+			size = len(defs_dict[map_entry])
+			assignment = get_current_assignment(map_entry, size, vars_dict)
+			defs_dict[map_entry][assignment] = new_table
 			i += num_values
 
 #parses input from an xml file
@@ -80,7 +92,7 @@ def parse(filename):
 						map_entry[1].append(given)
 				map_entry[1] = tuple(map_entry[1])
 				map_entry = tuple(map_entry)
-				defs_dict[map_entry] = []
+				defs_dict[map_entry] = {}
 				if "<TABLE>" in peek_line(foo):
 					line = foo.readline().replace("<TABLE>", "")
 					while "</TABLE>" not in line:
