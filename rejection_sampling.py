@@ -8,16 +8,11 @@ def prior_sample(bn):
 	for X in bn.vars_dict:
 		e = {}
 		pars = bayesian_network.parents(X)
-		# print "Var:" + X
-		print ("Parents %s" % str(pars))
+		# print ("Parents %s" % str(pars))
 		for var in pars:
-			print "Printing var"
-			# print var
 			randvar = randint(0,len(bn.vars_dict[var])-1)
-			# print randvar
 			e[var] = bn.vars_dict[var][randvar]
-			# print e
-			print "loop end"
+
 		randvar = randint(0,len(bn.vars_dict[var])-1)
 		e[X] = bn.vars_dict[X][randvar]
 		event.append(bn.P(X, e, bn.vars_dict[X].index(e[X])))
@@ -31,7 +26,7 @@ def rejection_sample(X, e, bn, NSample):
 	print X
 	parent_of_X = bayesian_network.parents(X)
 	print bn.vars_dict
-	print bn.defs_dict[(X, parent_of_X)]
+	def_dict = bn.defs_dict[(X, parent_of_X)]
 	
 	for j in range(NSample):
 		X_list = prior_sample(bn)
@@ -39,22 +34,16 @@ def rejection_sample(X, e, bn, NSample):
 		print X_list
 		boolean = True
 		vars_dict = bn.vars_dict.keys()
-		for in in range()
-		for i in range(len(vars_dict)):
+		for n in (def_dict):
+			print n
+			print def_dict
 			print "Printing e vars dict i"
-			print e[vars_dict[i]]
-			if e[vars_dict[i]] != X_list[i]:
-				boolean = False
-				print "Boolean became false"
-				break
-		print "Printing N before Boolean"
-		print N
-		if boolean:
-			for i in range(len(X_list)):
-				print i
-				N[i] = (X_list[i] + 1)
-		else:
-			boolean = True
+			for i in range(len(def_dict[n])):
+				print X_list
+				if def_dict[n][i] in X_list:
+					print "Matched"
+					N[i] += 1
+
 	print N
 	return bn.normalize(N)
 
