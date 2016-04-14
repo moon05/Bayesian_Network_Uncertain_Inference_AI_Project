@@ -1,0 +1,73 @@
+--- Download and installation
+
+1. Download this Bayesian belief networks convertor package from the following url,
+
+http://www.kddresearch.org/KDD/Groups/Probabilistic-Reasoning/convertor.html
+
+The package includes this file, 15 java source files, and 9 test BBN files
+all in different formats.
+
+2. Extract it to your disk using "tar xvf convertor.tar" under unix/linux and Winzip under Windows, 
+  you get the a directory "convertor" with the following content,
+
+**************************************************************************
+[hpguo@ringil ~/convertor]$ ls -la convertor/*
+-rw-rw-rw-   1 hpguo    kdd          3068 Jul  9 14:15 convertor/readme
+
+convertor/bbns:
+total 113
+drwxrwxrwx   2 hpguo    kdd           512 Jul  9 13:46 .
+drwxrwxr-x   4 hpguo    kdd           512 Jul  9 08:27 ..
+-rw-rw-rw-   1 hpguo    kdd          2074 Nov 12  2001 ASIA.ENT
+-rw-rw-rw-   1 hpguo    kdd          7260 Nov 12  2001 Asia.dsl
+-rw-rw-rw-   1 hpguo    kdd         13771 Nov 12  2001 alarm.dsc
+-rw-rw-rw-   1 hpguo    kdd         38879 Feb  7 04:47 alarm.ideal
+-rw-rw-rw-   1 hpguo    kdd         35230 Nov 12  2001 alarm.xbn
+-rw-rw-rw-   1 hpguo    kdd          1902 Nov 12  2001 asia.bif
+-rw-rw-rw-   1 hpguo    kdd          4391 Nov 12  2001 asia.dnet
+-rw-rw-rw-   1 hpguo    kdd          1584 Nov 12  2001 asia.net
+-rw-rw-rw-   1 hpguo    kdd          3133 Nov 12  2001 asia.xml
+
+convertor/xbneditor:
+total 216
+drwxrwxrwx   2 hpguo    kdd           512 Jul  9 13:46 .
+drwxrwxr-x   4 hpguo    kdd           512 Jul  9 08:27 ..
+-rw-rw-rw-   1 hpguo    kdd          1021 Nov 12  2001 BBNConvertor.java
+-rw-rw-rw-   1 hpguo    kdd          2390 Nov 12  2001 Block.java
+-rw-rw-rw-   1 hpguo    kdd          7325 Nov 12  2001 ChanceBlock.java
+-rw-rw-rw-   1 hpguo    kdd          9565 Nov 12  2001
+CountGraphErrors.java
+-rw-rw-rw-   1 hpguo    kdd          6391 Nov 12  2001 EditNode.java
+-rw-rw-rw-   1 hpguo    kdd        121311 Feb 21 05:24 FileIO.java
+-rw-rw-rw-   1 hpguo    kdd          2549 Nov 12  2001
+GraphErrorDialog.java
+-rw-rw-rw-   1 hpguo    kdd          3404 Nov 12  2001
+GraphErrorInput.java
+-rw-rw-rw-   1 hpguo    kdd         15303 Nov 12  2001 GraphicalBlock.java
+-rw-rw-rw-   1 hpguo    kdd          2313 Nov 12  2001 GraphicalPanel.java
+-rw-rw-rw-   1 hpguo    kdd          3005 Nov 12  2001 Item.java
+-rw-rw-rw-   1 hpguo    kdd          3007 Nov 12  2001 SaveDialog.java
+-rw-rw-rw-   1 hpguo    kdd           461 Nov 12  2001 Standalone.java
+-rw-rw-rw-   1 hpguo    kdd          2114 Nov 12  2001
+TextDocumentListener.java
+-rw-rw-rw-   1 hpguo    kdd         22375 Nov 12  2001 XBN.java
+[hpguo@ringil ~/convertor]$
+
+********************************************************************************
+
+--- Compile
+
+1. cd convertor
+2. javac xbneditor/*.java
+
+--- Run
+
+1. GUI mode as an editor: "java xbneditor/Standalone" as editor 
+   --- you can open BBN file, edit it, and save it to .bif, .xml or .net format
+
+2. Command line mode as a convertor: "java xbneditor/BBNConvertor [sourcefilename] [targetfilename]"
+   --- you can directly convert BBN file from one format to another format 
+ 
+   For example, to convert alarm from HUGIN .net format to XMLBIF .xml
+format:
+   java xbneditor/BBNConvertor alarm.net alarm.xml
