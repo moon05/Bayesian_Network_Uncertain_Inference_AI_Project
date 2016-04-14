@@ -24,4 +24,4 @@ def likelihood(X, e, bn, NSample):
 
 	for j in range(NSample):
 		event, w = weighted_sample(bn,e)
-	for 
+	for everything
