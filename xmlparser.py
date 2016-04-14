@@ -13,7 +13,7 @@ def trim(line, delim):
 	right = "</" + delim + ">"
 	line = line.replace(left, "").replace(right, "")
 	return line
-	
+
 #looks at the upcoming line instead of actually reading it
 def peek_line(f):
     pos = f.tell()
@@ -54,16 +54,16 @@ def parse(filename):
 
 	vars_list_dict = {}
 	defs_dict = {}
-	
+
 	foo = open(filename, "r")
 	print "Name of file: " + filename
 	print
-	
+
 	#variable loop
 	while True:
 		if "<DEFINITION>" in peek_line(foo):
 			break
-		
+
 		line = foo.readline()
 		if "<VARIABLE" in line:
 			line = foo.readline()
@@ -73,12 +73,12 @@ def parse(filename):
 				while "<OUTCOME>" in peek_line(foo):
 					outcome = trim(foo.readline(), "OUTCOME")
 					vars_list_dict[name].append(outcome)
-	
+
 	#definition loop
 	while True:
 		if "</BIF>" in peek_line(foo):
 			break
-		
+
 		line = foo.readline()
 		if "<DEFINITION>" in line:
 			line = foo.readline()

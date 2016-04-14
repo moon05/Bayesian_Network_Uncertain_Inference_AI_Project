@@ -24,19 +24,19 @@ def peek_line(f):
 def parse(filename):
 	if not os.path.exists(filename):
 		return ({}, {})
-		
+
 	vars_list_dict = {}
 	defs_dict = {}
-	
+
 	foo = open(filename, "r")
 	print "Name of file: " + filename
 	print
-	
+
 	#variable loop
 	while True:
 		if peek_line(foo).startswith("probability"):
 			break
-		
+
 		line = foo.readline()
 		if line.startswith("variable"):
 			name = re.sub("variable[\s]*", "", line.strip())
@@ -47,12 +47,12 @@ def parse(filename):
 			vals = vals.split(",")
 			vars_list_dict[name] = vals
 			foo.readline()
-	
+
 	#definitions loop
 	while True:
 		if peek_line(foo) == "":
 			break
-		
+
 		line = foo.readline()
 		if line.startswith("probability"):
 			map_entry = re.sub("probability[\s]*|\{", "", line.strip())

@@ -46,5 +46,19 @@ def rejection_sample(X, e, bn, NSample):
 
 	print N
 	return bn.normalize(N)
+	
+def parse(bn, args):
+	argc = len(args)
+	if argc < 2 or argc % 2 == 1:
+		print "Usage: <SamplingLimit> <query> [<given> <assignment>]*"
+		return None
+	N = args[0]
+	X = args[1]
+	e = {}
+	i = 2
+	while i < argc:
+		e[args[i]] = args[i+1]
+		i += 2
+	return rejection_sample(X, e, bn, NSample)
 
 
