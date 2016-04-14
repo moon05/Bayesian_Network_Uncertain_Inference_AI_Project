@@ -60,7 +60,6 @@ result = algorithm.parse(bn, sys.argv[3:])
 if result is None:
 	exit(-1)
 
-#converts it into a map for output
-e_list = dict_to_list(e)
-distribution = {(query, tuple(e_list)) : {() : result}}
+e_list = dict_to_list(result[1])
+distribution = {(result[0], tuple(e_list)) : {() : result[2]}}
 bn.print_dist_dict(distribution)

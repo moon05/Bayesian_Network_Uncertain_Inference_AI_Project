@@ -35,4 +35,4 @@ def parse(bn, args):
 	while i < argc:
 		e[args[i]] = args[i+1]
 		i += 2
-	return enumeration_ask(X, e, bn)
+	return (X, e, enumeration_ask(X, e, bn))
