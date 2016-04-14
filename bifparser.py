@@ -3,7 +3,7 @@ import re
 
 #generates a tuple of the assignments by reading the in line comments
 def get_current_assignment(line):
-	string = re.sub("([\d]+\.[\d]+,[\s]*)+[\d]+\.[\d]+;", "", line).strip()
+	string = re.sub("([\d]+(\.[\d]+)?,[\s]*)+[\d]+(\.[\d]+)?;", "", line).strip()
 	if re.match("\(([\w]+,[\s]*)*[\w]+\)", string) is None:
 		return tuple([])
 	string = re.sub("[\s]+", "", string.lstrip("(").rstrip(")"))
@@ -25,7 +25,7 @@ def parse(filename):
 	if not os.path.exists(filename):
 		return ({}, {})
 		
-	vars_dict = {}
+	vars_list_dict = {}
 	defs_dict = {}
 	
 	foo = open(filename, "r")
@@ -45,7 +45,7 @@ def parse(filename):
 			vals = re.sub("type[\s]*discrete[\s]*\[[\s]*[\d]+[\s]*\]", "", line.strip())
 			vals = re.sub("[\{\};\s]+", "", vals)
 			vals = vals.split(",")
-			vars_dict[name] = vals
+			vars_list_dict[name] = vals
 			foo.readline()
 	
 	#definitions loop
@@ -73,4 +73,5 @@ def parse(filename):
 					vals[i] = float(vals[i])
 				defs_dict[map_entry][assignment] = vals
 			foo.readline()
-	return (vars_dict, defs_dict)
+	foo.close()
+	return (vars_list_dict, defs_dict)

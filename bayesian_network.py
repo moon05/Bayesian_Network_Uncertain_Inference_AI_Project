@@ -5,38 +5,56 @@ defs_dict = {}
 def P(var, e, index):
 	vals = []
 	par = parents(var)
-	for element in e:
-		if element in par:
-			vals.append(e[element])
+	for element in par:
+		vals.append(e[element])
 	return defs_dict[(var, par)][tuple(vals)][index]
+
+#returns an graph representation of the bayesian network
+def get_graph():
+	graph = {}
+	for var in vars_dict.keys():
+		graph[var] = []
+	for entry in defs_dict.keys():
+		for element in entry[1]:
+			graph[element].append(entry[0])
+	return graph
 	
 #returns list of parents
 def parents(query):
-	for entry in defs_dict:
+	for entry in defs_dict.keys():
 		if entry[0] == query:
 			return entry[1]
 	return ()
 	
 #returns a list of variables in sorted topological order
 def topological_sort():
-	vars = vars_dict.keys()
+	vars_list = vars_dict.keys()
 	order = []
 	i = 0
-	while i < len(vars):
-		if not parents(vars[i]):
-			order.append(vars[i])
-			del vars[i]
+	while i < len(vars_list):
+		if not parents(vars_list[i]):
+			order.append(vars_list[i])
+			del vars_list[i]
 		else:
 			i += 1
-	while vars:
+	print order
+	boolean = False
+	while vars_list:
 		temp = []
 		i = 0
-		while i < len(vars):
-			if parents(vars[i])[0] in order:
-				temp.append(vars[i])
-				del vars[i]
-			else:
+		while i < len(vars_list):
+			par = parents(vars_list[i])
+			for element in par:
+				if element not in order:
+					boolean = True
+					break
+			if boolean:
 				i += 1
+				boolean = False
+			else:
+				temp.append(vars_list[i])
+				del vars_list[i]
+		print temp
 		for element in temp:
 			order.append(element)
 	return order

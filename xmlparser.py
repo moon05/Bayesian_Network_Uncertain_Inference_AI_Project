@@ -22,18 +22,18 @@ def peek_line(f):
     return line
 
 #generates tuple of the assignments of the current map_entry being added
-def get_current_assignment(map_entry, size, vars_dict):
+def get_current_assignment(map_entry, size, vars_list_dict):
 	assignment = []
 	length = len(map_entry[1])
 	for i in range(length):
 		pow = 2**(length-i-1)
-		num_values = len(vars_dict[map_entry[1][i]])
-		assignment.append(vars_dict[map_entry[1][i]][size/pow % (num_values)])
+		num_values = len(vars_list_dict[map_entry[1][i]])
+		assignment.append(vars_list_dict[map_entry[1][i]][size/pow % (num_values)])
 	return tuple(assignment)
 
 #adds a input to the definitions dictionary
-def add_to_defs(line, query, map_entry, vars_dict, defs_dict):
-	num_values = len(vars_dict[query])
+def add_to_defs(line, query, map_entry, vars_list_dict, defs_dict):
+	num_values = len(vars_list_dict[query])
 	if line != "":
 		table = line.split()
 		length = len(table)
@@ -43,7 +43,7 @@ def add_to_defs(line, query, map_entry, vars_dict, defs_dict):
 			for j in range(num_values):
 				new_table.append(float(table[i + j]))
 			size = len(defs_dict[map_entry])
-			assignment = get_current_assignment(map_entry, size, vars_dict)
+			assignment = get_current_assignment(map_entry, size, vars_list_dict)
 			defs_dict[map_entry][assignment] = new_table
 			i += num_values
 
@@ -52,7 +52,7 @@ def parse(filename):
 	if not os.path.exists(filename):
 		return ({}, {})
 
-	vars_dict = {}
+	vars_list_dict = {}
 	defs_dict = {}
 	
 	foo = open(filename, "r")
@@ -69,14 +69,14 @@ def parse(filename):
 			line = foo.readline()
 			if "<NAME>" in line:
 				name = trim(line, "NAME")
-				vars_dict[name] = []
+				vars_list_dict[name] = []
 				while "<OUTCOME>" in peek_line(foo):
 					outcome = trim(foo.readline(), "OUTCOME")
-					vars_dict[name].append(outcome)
+					vars_list_dict[name].append(outcome)
 	
 	#definition loop
 	while True:
-		if ("</BIF>" in peek_line(foo)):
+		if "</BIF>" in peek_line(foo):
 			break
 		
 		line = foo.readline()
@@ -97,8 +97,9 @@ def parse(filename):
 					line = foo.readline().replace("<TABLE>", "")
 					while "</TABLE>" not in line:
 						line = replace_comments(line).strip()
-						add_to_defs(line, query, map_entry, vars_dict, defs_dict)
+						add_to_defs(line, query, map_entry, vars_list_dict, defs_dict)
 						line = foo.readline()
 					line = replace_comments(line).strip().replace("</TABLE>", "")
-					add_to_defs(line, query, map_entry, vars_dict, defs_dict)
-	return (vars_dict, defs_dict)
+					add_to_defs(line, query, map_entry, vars_list_dict, defs_dict)
+	foo.close()
+	return (vars_list_dict, defs_dict)
