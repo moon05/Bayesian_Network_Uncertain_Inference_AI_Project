@@ -1,0 +1,812 @@
+<?xml version="1.0"?>
+<!DOCTYPE ANALYSISNOTEBOOK SYSTEM "xbn.dtd">
+<ANALYSISNOTEBOOK NAME="Notebook.Alarm" ROOT="Alarm">
+   <BNMODEL NAME="Alarm">
+      <STATICPROPERTIES>
+         <FORMAT VALUE="MSR DTAS XML"/>
+         <VERSION VALUE="0.2"/>
+         <CREATOR VALUE="Microsoft Research DTAS"/>
+      </STATICPROPERTIES>
+      <DYNAMICPROPERTIES>
+         <PROPERTYTYPE NAME="MS_category" TYPE="string">
+            <COMMENT>Usage category</COMMENT>
+         </PROPERTYTYPE>
+         <PROPERTYTYPE NAME="MS_label" TYPE="enumeration"
+            ENUMSET="other hypothesis informational problem fixobs fixunobs unfixable configuration">
+            <COMMENT>Troubleshooting category</COMMENT>
+         </PROPERTYTYPE>
+      </DYNAMICPROPERTIES>
+      <VARIABLES>
+         <VAR NAME="node_0" TYPE="discrete" XPOS="10500" YPOS="12300">
+            <DESCRIPTION>HISTORY</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+         </VAR>
+         <VAR NAME="node_1" TYPE="discrete" XPOS="12002" YPOS="13750">
+            <DESCRIPTION>CVP</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+            <STATENAME>value2</STATENAME>
+         </VAR>
+         <VAR NAME="node_10" TYPE="discrete" XPOS="10560" YPOS="22450">
+            <DESCRIPTION>ERRCAUTER</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+         </VAR>
+         <VAR NAME="node_11" TYPE="discrete" XPOS="12577" YPOS="23900">
+            <DESCRIPTION>HRSAT</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+            <STATENAME>value2</STATENAME>
+         </VAR>
+         <VAR NAME="node_12" TYPE="discrete" XPOS="13157" YPOS="19550">
+            <DESCRIPTION>INSUFFANESTH</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+         </VAR>
+         <VAR NAME="node_13" TYPE="discrete" XPOS="10245" YPOS="10215">
+            <DESCRIPTION>ANAPHYLAXIS</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+         </VAR>
+         <VAR NAME="node_14" TYPE="discrete" XPOS="10743" YPOS="19550">
+            <DESCRIPTION>TPR</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+            <STATENAME>value2</STATENAME>
+         </VAR>
+         <VAR NAME="node_15" TYPE="discrete" XPOS="12150" YPOS="19550">
+            <DESCRIPTION>EXPCO2</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+            <STATENAME>value2</STATENAME>
+            <STATENAME>value3</STATENAME>
+         </VAR>
+         <VAR NAME="node_16" TYPE="discrete" XPOS="13454" YPOS="13750">
+            <DESCRIPTION>KINKEDTUBE</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+         </VAR>
+         <VAR NAME="node_17" TYPE="discrete" XPOS="11718" YPOS="16650">
+            <DESCRIPTION>MINVOL</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+            <STATENAME>value2</STATENAME>
+            <STATENAME>value3</STATENAME>
+         </VAR>
+         <VAR NAME="node_18" TYPE="discrete" XPOS="11038" YPOS="16650">
+            <DESCRIPTION>FIO2</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+         </VAR>
+         <VAR NAME="node_19" TYPE="discrete" XPOS="11962" YPOS="18100">
+            <DESCRIPTION>PVSAT</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+            <STATENAME>value2</STATENAME>
+         </VAR>
+         <VAR NAME="node_2" TYPE="discrete" XPOS="12632" YPOS="13750">
+            <DESCRIPTION>PCWP</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+            <STATENAME>value2</STATENAME>
+         </VAR>
+         <VAR NAME="node_20" TYPE="discrete" XPOS="11390" YPOS="19550">
+            <DESCRIPTION>SAO2</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+            <STATENAME>value2</STATENAME>
+         </VAR>
+         <VAR NAME="node_21" TYPE="discrete" XPOS="14381" YPOS="12300">
+            <DESCRIPTION>PAP</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+            <STATENAME>value2</STATENAME>
+         </VAR>
+         <VAR NAME="node_22" TYPE="discrete" XPOS="13622" YPOS="10200">
+            <DESCRIPTION>PULMEMBOLUS</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+         </VAR>
+         <VAR NAME="node_23" TYPE="discrete" XPOS="11031" YPOS="18100">
+            <DESCRIPTION>SHUNT</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+         </VAR>
+         <VAR NAME="node_24" TYPE="discrete" XPOS="12040" YPOS="10200">
+            <DESCRIPTION>INTUBATION</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+            <STATENAME>value2</STATENAME>
+         </VAR>
+         <VAR NAME="node_25" TYPE="discrete" XPOS="11459" YPOS="15200">
+            <DESCRIPTION>PRESS</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+            <STATENAME>value2</STATENAME>
+            <STATENAME>value3</STATENAME>
+         </VAR>
+         <VAR NAME="node_26" TYPE="discrete" XPOS="11611" YPOS="12300">
+            <DESCRIPTION>DISCONNECT</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+         </VAR>
+         <VAR NAME="node_27" TYPE="discrete" XPOS="11000" YPOS="10850">
+            <DESCRIPTION>MINVOLSET</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+            <STATENAME>value2</STATENAME>
+         </VAR>
+         <VAR NAME="node_28" TYPE="discrete" XPOS="13081" YPOS="12300">
+            <DESCRIPTION>VENTMACH</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+            <STATENAME>value2</STATENAME>
+            <STATENAME>value3</STATENAME>
+         </VAR>
+         <VAR NAME="node_29" TYPE="discrete" XPOS="10730" YPOS="13750">
+            <DESCRIPTION>VENTTUBE</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+            <STATENAME>value2</STATENAME>
+            <STATENAME>value3</STATENAME>
+         </VAR>
+         <VAR NAME="node_3" TYPE="discrete" XPOS="12540" YPOS="10850">
+            <DESCRIPTION>HYPOVOLEMIA</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+         </VAR>
+         <VAR NAME="node_30" TYPE="discrete" XPOS="12359" YPOS="15200">
+            <DESCRIPTION>VENTLUNG</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+            <STATENAME>value2</STATENAME>
+            <STATENAME>value3</STATENAME>
+         </VAR>
+         <VAR NAME="node_31" TYPE="discrete" XPOS="12710" YPOS="16650">
+            <DESCRIPTION>VENTALV</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+            <STATENAME>value2</STATENAME>
+            <STATENAME>value3</STATENAME>
+         </VAR>
+         <VAR NAME="node_32" TYPE="discrete" XPOS="12847" YPOS="18100">
+            <DESCRIPTION>ARTCO2</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+            <STATENAME>value2</STATENAME>
+         </VAR>
+         <VAR NAME="node_33" TYPE="discrete" XPOS="12883" YPOS="21000">
+            <DESCRIPTION>CATECHOL</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+         </VAR>
+         <VAR NAME="node_34" TYPE="discrete" XPOS="15548" YPOS="22450">
+            <DESCRIPTION>HR</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+            <STATENAME>value2</STATENAME>
+         </VAR>
+         <VAR NAME="node_35" TYPE="discrete" XPOS="13493" YPOS="23900">
+            <DESCRIPTION>CO</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+            <STATENAME>value2</STATENAME>
+         </VAR>
+         <VAR NAME="node_36" TYPE="discrete" XPOS="13236" YPOS="25350">
+            <DESCRIPTION>BP</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+            <STATENAME>value2</STATENAME>
+         </VAR>
+         <VAR NAME="node_4" TYPE="discrete" XPOS="15011" YPOS="12300">
+            <DESCRIPTION>LVEDVOLUME</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+            <STATENAME>value2</STATENAME>
+         </VAR>
+         <VAR NAME="node_5" TYPE="discrete" XPOS="14122" YPOS="10850">
+            <DESCRIPTION>LVFAILURE</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+         </VAR>
+         <VAR NAME="node_6" TYPE="discrete" XPOS="13788" YPOS="22450">
+            <DESCRIPTION>STROKEVOLUME</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+            <STATENAME>value2</STATENAME>
+         </VAR>
+         <VAR NAME="node_7" TYPE="discrete" XPOS="11974" YPOS="22450">
+            <DESCRIPTION>ERRLOWOUTPUT</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+         </VAR>
+         <VAR NAME="node_8" TYPE="discrete" XPOS="10854" YPOS="23900">
+            <DESCRIPTION>HRBP</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+            <STATENAME>value2</STATENAME>
+         </VAR>
+         <VAR NAME="node_9" TYPE="discrete" XPOS="11646" YPOS="23900">
+            <DESCRIPTION>HREKG</DESCRIPTION>
+            <STATENAME>value0</STATENAME>
+            <STATENAME>value1</STATENAME>
+            <STATENAME>value2</STATENAME>
+         </VAR>
+      </VARIABLES>
+      <STRUCTURE>
+         <ARC PARENT="node_5" CHILD="node_0"/>
+         <ARC PARENT="node_4" CHILD="node_1"/>
+         <ARC PARENT="node_10" CHILD="node_11"/>
+         <ARC PARENT="node_34" CHILD="node_11"/>
+         <ARC PARENT="node_13" CHILD="node_14"/>
+         <ARC PARENT="node_30" CHILD="node_15"/>
+         <ARC PARENT="node_32" CHILD="node_15"/>
+         <ARC PARENT="node_24" CHILD="node_17"/>
+         <ARC PARENT="node_30" CHILD="node_17"/>
+         <ARC PARENT="node_18" CHILD="node_19"/>
+         <ARC PARENT="node_31" CHILD="node_19"/>
+         <ARC PARENT="node_4" CHILD="node_2"/>
+         <ARC PARENT="node_19" CHILD="node_20"/>
+         <ARC PARENT="node_23" CHILD="node_20"/>
+         <ARC PARENT="node_22" CHILD="node_21"/>
+         <ARC PARENT="node_22" CHILD="node_23"/>
+         <ARC PARENT="node_24" CHILD="node_23"/>
+         <ARC PARENT="node_16" CHILD="node_25"/>
+         <ARC PARENT="node_24" CHILD="node_25"/>
+         <ARC PARENT="node_29" CHILD="node_25"/>
+         <ARC PARENT="node_27" CHILD="node_28"/>
+         <ARC PARENT="node_26" CHILD="node_29"/>
+         <ARC PARENT="node_28" CHILD="node_29"/>
+         <ARC PARENT="node_16" CHILD="node_30"/>
+         <ARC PARENT="node_24" CHILD="node_30"/>
+         <ARC PARENT="node_29" CHILD="node_30"/>
+         <ARC PARENT="node_24" CHILD="node_31"/>
+         <ARC PARENT="node_30" CHILD="node_31"/>
+         <ARC PARENT="node_31" CHILD="node_32"/>
+         <ARC PARENT="node_12" CHILD="node_33"/>
+         <ARC PARENT="node_14" CHILD="node_33"/>
+         <ARC PARENT="node_20" CHILD="node_33"/>
+         <ARC PARENT="node_32" CHILD="node_33"/>
+         <ARC PARENT="node_33" CHILD="node_34"/>
+         <ARC PARENT="node_6" CHILD="node_35"/>
+         <ARC PARENT="node_34" CHILD="node_35"/>
+         <ARC PARENT="node_14" CHILD="node_36"/>
+         <ARC PARENT="node_35" CHILD="node_36"/>
+         <ARC PARENT="node_3" CHILD="node_4"/>
+         <ARC PARENT="node_5" CHILD="node_4"/>
+         <ARC PARENT="node_3" CHILD="node_6"/>
+         <ARC PARENT="node_5" CHILD="node_6"/>
+         <ARC PARENT="node_7" CHILD="node_8"/>
+         <ARC PARENT="node_34" CHILD="node_8"/>
+         <ARC PARENT="node_10" CHILD="node_9"/>
+         <ARC PARENT="node_34" CHILD="node_9"/>
+      </STRUCTURE>
+      <DISTRIBUTIONS>
+         <DIST TYPE="discrete">
+            <CONDSET>
+               <CONDELEM NAME="node_5"/>
+            </CONDSET>
+            <PRIVATE NAME="node_0"/>
+            <DPIS>
+               <DPI INDEXES=" 0 "> 0.9 0.1</DPI>
+               <DPI INDEXES=" 1 "> 0.01 0.99</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <CONDSET>
+               <CONDELEM NAME="node_4"/>
+            </CONDSET>
+            <PRIVATE NAME="node_1"/>
+            <DPIS>
+               <DPI INDEXES=" 0 "> 0.95 0.04 0.01</DPI>
+               <DPI INDEXES=" 1 "> 0.04 0.95 0.01</DPI>
+               <DPI INDEXES=" 2 "> 0.01 0.29 0.7</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <PRIVATE NAME="node_10"/>
+            <DPIS>
+               <DPI> 0.1 0.9</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <CONDSET>
+               <CONDELEM NAME="node_10"/>
+               <CONDELEM NAME="node_34"/>
+            </CONDSET>
+            <PRIVATE NAME="node_11"/>
+            <DPIS>
+               <DPI INDEXES=" 0 0 "> 0.333 0.333 0.333</DPI>
+               <DPI INDEXES=" 0 1 "> 0.333 0.333 0.333</DPI>
+               <DPI INDEXES=" 0 2 "> 0.333 0.333 0.333</DPI>
+               <DPI INDEXES=" 1 0 "> 0.98 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 1 "> 0.01 0.98 0.01</DPI>
+               <DPI INDEXES=" 1 2 "> 0.01 0.01 0.98</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <PRIVATE NAME="node_12"/>
+            <DPIS>
+               <DPI> 0.1 0.9</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <PRIVATE NAME="node_13"/>
+            <DPIS>
+               <DPI> 0.01 0.99</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <CONDSET>
+               <CONDELEM NAME="node_13"/>
+            </CONDSET>
+            <PRIVATE NAME="node_14"/>
+            <DPIS>
+               <DPI INDEXES=" 0 "> 0.98 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 "> 0.3 0.4 0.3</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <CONDSET>
+               <CONDELEM NAME="node_30"/>
+               <CONDELEM NAME="node_32"/>
+            </CONDSET>
+            <PRIVATE NAME="node_15"/>
+            <DPIS>
+               <DPI INDEXES=" 0 0 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 1 "> 0.01 0.97 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 2 "> 0.01 0.97 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 0 "> 0.01 0.97 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 1 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 2 "> 0.01 0.01 0.97 0.01</DPI>
+               <DPI INDEXES=" 2 0 "> 0.01 0.01 0.97 0.01</DPI>
+               <DPI INDEXES=" 2 1 "> 0.01 0.01 0.97 0.01</DPI>
+               <DPI INDEXES=" 2 2 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 3 0 "> 0.01 0.01 0.01 0.97</DPI>
+               <DPI INDEXES=" 3 1 "> 0.01 0.01 0.01 0.97</DPI>
+               <DPI INDEXES=" 3 2 "> 0.01 0.01 0.01 0.97</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <PRIVATE NAME="node_16"/>
+            <DPIS>
+               <DPI> 0.04 0.96</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <CONDSET>
+               <CONDELEM NAME="node_24"/>
+               <CONDELEM NAME="node_30"/>
+            </CONDSET>
+            <PRIVATE NAME="node_17"/>
+            <DPIS>
+               <DPI INDEXES=" 0 0 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 1 "> 0.01 0.97 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 2 "> 0.01 0.01 0.97 0.01</DPI>
+               <DPI INDEXES=" 0 3 "> 0.01 0.01 0.01 0.97</DPI>
+               <DPI INDEXES=" 1 0 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 1 "> 0.6 0.38 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 2 "> 0.5 0.48 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 3 "> 0.5 0.48 0.01 0.01</DPI>
+               <DPI INDEXES=" 2 0 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 2 1 "> 0.01 0.97 0.01 0.01</DPI>
+               <DPI INDEXES=" 2 2 "> 0.01 0.01 0.97 0.01</DPI>
+               <DPI INDEXES=" 2 3 "> 0.01 0.01 0.01 0.97</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <PRIVATE NAME="node_18"/>
+            <DPIS>
+               <DPI> 0.05 0.95</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <CONDSET>
+               <CONDELEM NAME="node_18"/>
+               <CONDELEM NAME="node_31"/>
+            </CONDSET>
+            <PRIVATE NAME="node_19"/>
+            <DPIS>
+               <DPI INDEXES=" 0 0 "> 1 0 0</DPI>
+               <DPI INDEXES=" 0 1 "> 0.99 0.01 0</DPI>
+               <DPI INDEXES=" 0 2 "> 0.95 0.04 0.01</DPI>
+               <DPI INDEXES=" 0 3 "> 0.95 0.04 0.01</DPI>
+               <DPI INDEXES=" 1 0 "> 1 0 0</DPI>
+               <DPI INDEXES=" 1 1 "> 0.95 0.04 0.01</DPI>
+               <DPI INDEXES=" 1 2 "> 0.01 0.95 0.04</DPI>
+               <DPI INDEXES=" 1 3 "> 0.01 0.01 0.98</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <CONDSET>
+               <CONDELEM NAME="node_4"/>
+            </CONDSET>
+            <PRIVATE NAME="node_2"/>
+            <DPIS>
+               <DPI INDEXES=" 0 "> 0.95 0.04 0.01</DPI>
+               <DPI INDEXES=" 1 "> 0.04 0.95 0.01</DPI>
+               <DPI INDEXES=" 2 "> 0.01 0.04 0.95</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <CONDSET>
+               <CONDELEM NAME="node_19"/>
+               <CONDELEM NAME="node_23"/>
+            </CONDSET>
+            <PRIVATE NAME="node_20"/>
+            <DPIS>
+               <DPI INDEXES=" 0 0 "> 0.98 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 1 "> 0.01 0.98 0.01</DPI>
+               <DPI INDEXES=" 1 0 "> 0.01 0.01 0.98</DPI>
+               <DPI INDEXES=" 1 1 "> 0.98 0.01 0.01</DPI>
+               <DPI INDEXES=" 2 0 "> 0.98 0.01 0.01</DPI>
+               <DPI INDEXES=" 2 1 "> 0.69 0.3 0.01</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <CONDSET>
+               <CONDELEM NAME="node_22"/>
+            </CONDSET>
+            <PRIVATE NAME="node_21"/>
+            <DPIS>
+               <DPI INDEXES=" 0 "> 0.01 0.19 0.8</DPI>
+               <DPI INDEXES=" 1 "> 0.05 0.9 0.05</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <PRIVATE NAME="node_22"/>
+            <DPIS>
+               <DPI> 0.01 0.99</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <CONDSET>
+               <CONDELEM NAME="node_22"/>
+               <CONDELEM NAME="node_24"/>
+            </CONDSET>
+            <PRIVATE NAME="node_23"/>
+            <DPIS>
+               <DPI INDEXES=" 0 0 "> 0.1 0.9</DPI>
+               <DPI INDEXES=" 0 1 "> 0.1 0.9</DPI>
+               <DPI INDEXES=" 0 2 "> 0.01 0.99</DPI>
+               <DPI INDEXES=" 1 0 "> 0.95 0.05</DPI>
+               <DPI INDEXES=" 1 1 "> 0.95 0.05</DPI>
+               <DPI INDEXES=" 1 2 "> 0.05 0.95</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <PRIVATE NAME="node_24"/>
+            <DPIS>
+               <DPI> 0.92 0.03 0.05</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <CONDSET>
+               <CONDELEM NAME="node_16"/>
+               <CONDELEM NAME="node_24"/>
+               <CONDELEM NAME="node_29"/>
+            </CONDSET>
+            <PRIVATE NAME="node_25"/>
+            <DPIS>
+               <DPI INDEXES=" 0 0 0 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 0 1 "> 0.01 0.3 0.49 0.2</DPI>
+               <DPI INDEXES=" 0 0 2 "> 0.01 0.01 0.08 0.9</DPI>
+               <DPI INDEXES=" 0 0 3 "> 0.01 0.01 0.01 0.97</DPI>
+               <DPI INDEXES=" 0 1 0 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 1 1 "> 0.1 0.84 0.05 0.01</DPI>
+               <DPI INDEXES=" 0 1 2 "> 0.05 0.25 0.25 0.45</DPI>
+               <DPI INDEXES=" 0 1 3 "> 0.01 0.15 0.25 0.59</DPI>
+               <DPI INDEXES=" 0 2 0 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 2 1 "> 0.01 0.29 0.3 0.4</DPI>
+               <DPI INDEXES=" 0 2 2 "> 0.01 0.01 0.08 0.9</DPI>
+               <DPI INDEXES=" 0 2 3 "> 0.01 0.01 0.01 0.97</DPI>
+               <DPI INDEXES=" 1 0 0 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 0 1 "> 0.01 0.97 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 0 2 "> 0.01 0.01 0.97 0.01</DPI>
+               <DPI INDEXES=" 1 0 3 "> 0.01 0.01 0.01 0.97</DPI>
+               <DPI INDEXES=" 1 1 0 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 1 1 "> 0.4 0.58 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 1 2 "> 0.2 0.75 0.04 0.01</DPI>
+               <DPI INDEXES=" 1 1 3 "> 0.2 0.7 0.09 0.01</DPI>
+               <DPI INDEXES=" 1 2 0 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 2 1 "> 0.01 0.9 0.08 0.01</DPI>
+               <DPI INDEXES=" 1 2 2 "> 0.01 0.01 0.38 0.6</DPI>
+               <DPI INDEXES=" 1 2 3 "> 0.01 0.01 0.01 0.97</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <PRIVATE NAME="node_26"/>
+            <DPIS>
+               <DPI> 0.1 0.9</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <PRIVATE NAME="node_27"/>
+            <DPIS>
+               <DPI> 0.05 0.9 0.05</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <CONDSET>
+               <CONDELEM NAME="node_27"/>
+            </CONDSET>
+            <PRIVATE NAME="node_28"/>
+            <DPIS>
+               <DPI INDEXES=" 0 "> 0.05 0.93 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 "> 0.05 0.01 0.93 0.01</DPI>
+               <DPI INDEXES=" 2 "> 0.05 0.01 0.01 0.93</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <CONDSET>
+               <CONDELEM NAME="node_26"/>
+               <CONDELEM NAME="node_28"/>
+            </CONDSET>
+            <PRIVATE NAME="node_29"/>
+            <DPIS>
+               <DPI INDEXES=" 0 0 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 1 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 2 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 3 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 0 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 1 "> 0.01 0.97 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 2 "> 0.01 0.01 0.97 0.01</DPI>
+               <DPI INDEXES=" 1 3 "> 0.01 0.01 0.01 0.97</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <PRIVATE NAME="node_3"/>
+            <DPIS>
+               <DPI> 0.2 0.8</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <CONDSET>
+               <CONDELEM NAME="node_16"/>
+               <CONDELEM NAME="node_24"/>
+               <CONDELEM NAME="node_29"/>
+            </CONDSET>
+            <PRIVATE NAME="node_30"/>
+            <DPIS>
+               <DPI INDEXES=" 0 0 0 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 0 1 "> 0.95 0.03 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 0 2 "> 0.4 0.58 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 0 3 "> 0.3 0.68 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 1 0 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 1 1 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 1 2 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 1 3 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 2 0 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 2 1 "> 0.95 0.03 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 2 2 "> 0.5 0.48 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 2 3 "> 0.3 0.68 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 0 0 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 0 1 "> 0.01 0.97 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 0 2 "> 0.01 0.01 0.97 0.01</DPI>
+               <DPI INDEXES=" 1 0 3 "> 0.01 0.01 0.01 0.97</DPI>
+               <DPI INDEXES=" 1 1 0 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 1 1 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 1 2 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 1 3 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 2 0 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 2 1 "> 0.01 0.97 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 2 2 "> 0.01 0.01 0.97 0.01</DPI>
+               <DPI INDEXES=" 1 2 3 "> 0.01 0.01 0.01 0.97</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <CONDSET>
+               <CONDELEM NAME="node_24"/>
+               <CONDELEM NAME="node_30"/>
+            </CONDSET>
+            <PRIVATE NAME="node_31"/>
+            <DPIS>
+               <DPI INDEXES=" 0 0 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 1 "> 0.01 0.97 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 2 "> 0.01 0.01 0.97 0.01</DPI>
+               <DPI INDEXES=" 0 3 "> 0.01 0.01 0.01 0.97</DPI>
+               <DPI INDEXES=" 1 0 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 1 "> 0.01 0.97 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 2 "> 0.01 0.01 0.97 0.01</DPI>
+               <DPI INDEXES=" 1 3 "> 0.01 0.01 0.01 0.97</DPI>
+               <DPI INDEXES=" 2 0 "> 0.97 0.01 0.01 0.01</DPI>
+               <DPI INDEXES=" 2 1 "> 0.03 0.95 0.01 0.01</DPI>
+               <DPI INDEXES=" 2 2 "> 0.01 0.94 0.04 0.01</DPI>
+               <DPI INDEXES=" 2 3 "> 0.01 0.88 0.1 0.01</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <CONDSET>
+               <CONDELEM NAME="node_31"/>
+            </CONDSET>
+            <PRIVATE NAME="node_32"/>
+            <DPIS>
+               <DPI INDEXES=" 0 "> 0.01 0.01 0.98</DPI>
+               <DPI INDEXES=" 1 "> 0.01 0.01 0.98</DPI>
+               <DPI INDEXES=" 2 "> 0.04 0.92 0.04</DPI>
+               <DPI INDEXES=" 3 "> 0.9 0.09 0.01</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <CONDSET>
+               <CONDELEM NAME="node_12"/>
+               <CONDELEM NAME="node_14"/>
+               <CONDELEM NAME="node_20"/>
+               <CONDELEM NAME="node_32"/>
+            </CONDSET>
+            <PRIVATE NAME="node_33"/>
+            <DPIS>
+               <DPI INDEXES=" 0 0 0 0 "> 0.01 0.99</DPI>
+               <DPI INDEXES=" 0 0 0 1 "> 0.01 0.99</DPI>
+               <DPI INDEXES=" 0 0 0 2 "> 0.01 0.99</DPI>
+               <DPI INDEXES=" 0 0 1 0 "> 0.01 0.99</DPI>
+               <DPI INDEXES=" 0 0 1 1 "> 0.01 0.99</DPI>
+               <DPI INDEXES=" 0 0 1 2 "> 0.01 0.99</DPI>
+               <DPI INDEXES=" 0 0 2 0 "> 0.01 0.99</DPI>
+               <DPI INDEXES=" 0 0 2 1 "> 0.01 0.99</DPI>
+               <DPI INDEXES=" 0 0 2 2 "> 0.01 0.99</DPI>
+               <DPI INDEXES=" 0 1 0 0 "> 0.01 0.99</DPI>
+               <DPI INDEXES=" 0 1 0 1 "> 0.01 0.99</DPI>
+               <DPI INDEXES=" 0 1 0 2 "> 0.01 0.99</DPI>
+               <DPI INDEXES=" 0 1 1 0 "> 0.01 0.99</DPI>
+               <DPI INDEXES=" 0 1 1 1 "> 0.01 0.99</DPI>
+               <DPI INDEXES=" 0 1 1 2 "> 0.01 0.99</DPI>
+               <DPI INDEXES=" 0 1 2 0 "> 0.05 0.95</DPI>
+               <DPI INDEXES=" 0 1 2 1 "> 0.05 0.95</DPI>
+               <DPI INDEXES=" 0 1 2 2 "> 0.01 0.99</DPI>
+               <DPI INDEXES=" 0 2 0 0 "> 0.01 0.99</DPI>
+               <DPI INDEXES=" 0 2 0 1 "> 0.01 0.99</DPI>
+               <DPI INDEXES=" 0 2 0 2 "> 0.01 0.99</DPI>
+               <DPI INDEXES=" 0 2 1 0 "> 0.05 0.95</DPI>
+               <DPI INDEXES=" 0 2 1 1 "> 0.05 0.95</DPI>
+               <DPI INDEXES=" 0 2 1 2 "> 0.01 0.99</DPI>
+               <DPI INDEXES=" 0 2 2 0 "> 0.05 0.95</DPI>
+               <DPI INDEXES=" 0 2 2 1 "> 0.05 0.95</DPI>
+               <DPI INDEXES=" 0 2 2 2 "> 0.01 0.99</DPI>
+               <DPI INDEXES=" 1 0 0 0 "> 0.05 0.95</DPI>
+               <DPI INDEXES=" 1 0 0 1 "> 0.05 0.95</DPI>
+               <DPI INDEXES=" 1 0 0 2 "> 0.01 0.99</DPI>
+               <DPI INDEXES=" 1 0 1 0 "> 0.05 0.95</DPI>
+               <DPI INDEXES=" 1 0 1 1 "> 0.05 0.95</DPI>
+               <DPI INDEXES=" 1 0 1 2 "> 0.01 0.99</DPI>
+               <DPI INDEXES=" 1 0 2 0 "> 0.05 0.95</DPI>
+               <DPI INDEXES=" 1 0 2 1 "> 0.05 0.95</DPI>
+               <DPI INDEXES=" 1 0 2 2 "> 0.01 0.99</DPI>
+               <DPI INDEXES=" 1 1 0 0 "> 0.7 0.3</DPI>
+               <DPI INDEXES=" 1 1 0 1 "> 0.7 0.3</DPI>
+               <DPI INDEXES=" 1 1 0 2 "> 0.1 0.9</DPI>
+               <DPI INDEXES=" 1 1 1 0 "> 0.7 0.3</DPI>
+               <DPI INDEXES=" 1 1 1 1 "> 0.7 0.3</DPI>
+               <DPI INDEXES=" 1 1 1 2 "> 0.1 0.9</DPI>
+               <DPI INDEXES=" 1 1 2 0 "> 0.7 0.3</DPI>
+               <DPI INDEXES=" 1 1 2 1 "> 0.7 0.3</DPI>
+               <DPI INDEXES=" 1 1 2 2 "> 0.1 0.9</DPI>
+               <DPI INDEXES=" 1 2 0 0 "> 0.95 0.05</DPI>
+               <DPI INDEXES=" 1 2 0 1 "> 0.99 0.01</DPI>
+               <DPI INDEXES=" 1 2 0 2 "> 0.3 0.7</DPI>
+               <DPI INDEXES=" 1 2 1 0 "> 0.95 0.05</DPI>
+               <DPI INDEXES=" 1 2 1 1 "> 0.99 0.01</DPI>
+               <DPI INDEXES=" 1 2 1 2 "> 0.3 0.7</DPI>
+               <DPI INDEXES=" 1 2 2 0 "> 0.95 0.05</DPI>
+               <DPI INDEXES=" 1 2 2 1 "> 0.99 0.01</DPI>
+               <DPI INDEXES=" 1 2 2 2 "> 0.3 0.7</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <CONDSET>
+               <CONDELEM NAME="node_33"/>
+            </CONDSET>
+            <PRIVATE NAME="node_34"/>
+            <DPIS>
+               <DPI INDEXES=" 0 "> 0.05 0.9 0.05</DPI>
+               <DPI INDEXES=" 1 "> 0.01 0.09 0.9</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <CONDSET>
+               <CONDELEM NAME="node_6"/>
+               <CONDELEM NAME="node_34"/>
+            </CONDSET>
+            <PRIVATE NAME="node_35"/>
+            <DPIS>
+               <DPI INDEXES=" 0 0 "> 0.98 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 1 "> 0.95 0.04 0.01</DPI>
+               <DPI INDEXES=" 0 2 "> 0.8 0.19 0.01</DPI>
+               <DPI INDEXES=" 1 0 "> 0.95 0.04 0.01</DPI>
+               <DPI INDEXES=" 1 1 "> 0.04 0.95 0.01</DPI>
+               <DPI INDEXES=" 1 2 "> 0.01 0.04 0.95</DPI>
+               <DPI INDEXES=" 2 0 "> 0.3 0.69 0.01</DPI>
+               <DPI INDEXES=" 2 1 "> 0.01 0.3 0.69</DPI>
+               <DPI INDEXES=" 2 2 "> 0.01 0.01 0.98</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <CONDSET>
+               <CONDELEM NAME="node_14"/>
+               <CONDELEM NAME="node_35"/>
+            </CONDSET>
+            <PRIVATE NAME="node_36"/>
+            <DPIS>
+               <DPI INDEXES=" 0 0 "> 0.98 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 1 "> 0.98 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 2 "> 0.9 0.09 0.01</DPI>
+               <DPI INDEXES=" 1 0 "> 0.98 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 1 "> 0.1 0.85 0.05</DPI>
+               <DPI INDEXES=" 1 2 "> 0.05 0.2 0.75</DPI>
+               <DPI INDEXES=" 2 0 "> 0.3 0.6 0.1</DPI>
+               <DPI INDEXES=" 2 1 "> 0.05 0.4 0.55</DPI>
+               <DPI INDEXES=" 2 2 "> 0.01 0.09 0.9</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <CONDSET>
+               <CONDELEM NAME="node_3"/>
+               <CONDELEM NAME="node_5"/>
+            </CONDSET>
+            <PRIVATE NAME="node_4"/>
+            <DPIS>
+               <DPI INDEXES=" 0 0 "> 0.95 0.04 0.01</DPI>
+               <DPI INDEXES=" 0 1 "> 0.98 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 0 "> 0.01 0.09 0.9</DPI>
+               <DPI INDEXES=" 1 1 "> 0.05 0.9 0.05</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <PRIVATE NAME="node_5"/>
+            <DPIS>
+               <DPI> 0.05 0.95</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <CONDSET>
+               <CONDELEM NAME="node_3"/>
+               <CONDELEM NAME="node_5"/>
+            </CONDSET>
+            <PRIVATE NAME="node_6"/>
+            <DPIS>
+               <DPI INDEXES=" 0 0 "> 0.98 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 1 "> 0.95 0.04 0.01</DPI>
+               <DPI INDEXES=" 1 0 "> 0.5 0.49 0.01</DPI>
+               <DPI INDEXES=" 1 1 "> 0.05 0.9 0.05</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <PRIVATE NAME="node_7"/>
+            <DPIS>
+               <DPI> 0.05 0.95</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <CONDSET>
+               <CONDELEM NAME="node_7"/>
+               <CONDELEM NAME="node_34"/>
+            </CONDSET>
+            <PRIVATE NAME="node_8"/>
+            <DPIS>
+               <DPI INDEXES=" 0 0 "> 0.98 0.01 0.01</DPI>
+               <DPI INDEXES=" 0 1 "> 0.4 0.59 0.01</DPI>
+               <DPI INDEXES=" 0 2 "> 0.3 0.4 0.3</DPI>
+               <DPI INDEXES=" 1 0 "> 0.98 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 1 "> 0.01 0.98 0.01</DPI>
+               <DPI INDEXES=" 1 2 "> 0.01 0.01 0.98</DPI>
+            </DPIS>
+         </DIST>
+         <DIST TYPE="discrete">
+            <CONDSET>
+               <CONDELEM NAME="node_10"/>
+               <CONDELEM NAME="node_34"/>
+            </CONDSET>
+            <PRIVATE NAME="node_9"/>
+            <DPIS>
+               <DPI INDEXES=" 0 0 "> 0.333 0.333 0.333</DPI>
+               <DPI INDEXES=" 0 1 "> 0.333 0.333 0.333</DPI>
+               <DPI INDEXES=" 0 2 "> 0.333 0.333 0.333</DPI>
+               <DPI INDEXES=" 1 0 "> 0.98 0.01 0.01</DPI>
+               <DPI INDEXES=" 1 1 "> 0.01 0.98 0.01</DPI>
+               <DPI INDEXES=" 1 2 "> 0.01 0.01 0.98</DPI>
+            </DPIS>
+         </DIST>
+      </DISTRIBUTIONS>
+   </BNMODEL>
+</ANALYSISNOTEBOOK>
