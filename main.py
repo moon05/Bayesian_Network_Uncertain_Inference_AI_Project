@@ -5,10 +5,12 @@ import xmlparser
 import bifparser
 import exact_inference
 import rejection_sampling
+import likelihood_sampling
 
 inference_algorithms = {
 	"exact" : exact_inference,
-	"rejection" : rejection_sampling
+	"rejection" : rejection_sampling,
+	"likelihood" : likelihood_sampling
 }
 
 #returns a list version of a dictionary
@@ -21,7 +23,7 @@ def dict_to_list(dict):
 #main routine
 argc = len(sys.argv)
 if argc < 3:
-	print "Usage: main.py <algorithm> <filename> <input>*"
+	print "Usage: main.py -<algorithm> <filename> <input>*"
 	exit(-1)
 
 option = sys.argv[1].strip("-")
