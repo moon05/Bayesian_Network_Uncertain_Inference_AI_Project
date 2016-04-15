@@ -16,7 +16,6 @@ def prior_sample(bn):
 		event.append(bn.P(X, e, bn.vars_dict[X].index(e[X])))
 	return event
 
-
 def rejection_sample(X, e, bn, NSample):
 	N = [0]* len(bn.vars_dict[X])
 	parents = bayesian_network.parents(X)
@@ -43,5 +42,3 @@ def parse(bn, args):
 		e[args[i]] = args[i+1]
 		i += 2
 	return (X, e, rejection_sample(X, e, bn, NSample))
-
-

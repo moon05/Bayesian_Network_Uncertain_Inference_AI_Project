@@ -29,7 +29,7 @@ if argc < 3:
 option = sys.argv[1].strip("-")
 if option not in inference_algorithms:
 	print "Error: not a valid inference algorithm"
-	print "Options: exact, rejection_sampling"
+	print "Options: %s" % inference_algorithms.keys()
 	exit(-1)
 
 #determines which parser should be used based on the file extension
