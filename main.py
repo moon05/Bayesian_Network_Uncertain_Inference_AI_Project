@@ -6,11 +6,13 @@ import bifparser
 import exact_inference
 import rejection_sampling
 import likelihood_sampling
+import gibbs_sampling
 
 inference_algorithms = {
 	"exact" : exact_inference,
 	"rejection" : rejection_sampling,
-	"likelihood" : likelihood_sampling
+	"likelihood" : likelihood_sampling,
+	"gibbs" : gibbs_sampling
 }
 
 #returns a list version of a dictionary

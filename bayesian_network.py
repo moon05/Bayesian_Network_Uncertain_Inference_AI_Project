@@ -2,12 +2,12 @@ vars_dict = {}
 defs_dict = {}
 
 #returns the probability of the query given a particular assignment
-def P(var, e, index):
+def P(var, e, givens):
+	index = vars_dict[var].index(e[var])
 	vals = []
-	par = parents(var)
-	for element in par:
+	for element in givens:
 		vals.append(e[element])
-	return defs_dict[(var, par)][tuple(vals)][index]
+	return defs_dict[(var, givens)][tuple(vals)][index]
 
 #returns an graph representation of the bayesian network
 def get_graph():
@@ -19,12 +19,31 @@ def get_graph():
 			graph[element].append(entry[0])
 	return graph
 
-#returns list of parents
+#returns list of parents given a query
 def parents(query):
 	for entry in defs_dict.keys():
 		if entry[0] == query:
 			return entry[1]
 	return ()
+
+#returns list of children given a query
+def children(query):
+	childs = []
+	for entry in defs_dict.keys():
+		if query in entry[1]:
+			childs.append(entry[0])
+	return tuple(childs)
+
+#returns markov blanket given a query
+def mb(query):
+	markov_blanket = list(parents(query))
+	childs = list(children(query))
+	markov_blanket.extend(childs)
+	for child in childs:
+		for parent in parents(child):
+			if parent not in markov_blanket:
+				markov_blanket.append
+	return tuple(markov_blanket)
 
 #returns a list of variables in sorted topological order
 def topological_sort():
