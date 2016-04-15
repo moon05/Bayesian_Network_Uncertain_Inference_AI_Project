@@ -11,7 +11,7 @@ def prior_sample(bn):
 			e[var] = bn.vars_dict[var][randvar]
 		randvar = randint(0,len(bn.vars_dict[X])-1)
 		e[X] = bn.vars_dict[X][randvar]
-		event.append(bn.P(X, e, bn.parents(X)))
+		event.append(bn.P(X, e, pars))
 	return event
 
 #returns the normalized distribution of P(X | e)

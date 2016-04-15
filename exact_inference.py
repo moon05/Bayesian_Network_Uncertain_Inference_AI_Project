@@ -1,7 +1,7 @@
 # returns the distribution over x
 def enumeration_ask(X, e, bn):
 	Q_X = []
-	vars_list = bn.topological_sort()
+	vars_list = bn.topological_sort(bn.vars_dict.keys())
 	for x in bn.vars_dict[X]:
 		e[X] = x
 		Q_X.append(enumeration_all(bn, vars_list, e))

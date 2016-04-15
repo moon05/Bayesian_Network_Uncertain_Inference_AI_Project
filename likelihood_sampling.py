@@ -7,14 +7,14 @@ def weighted_sample(bn,e):
 	for X in bn.topological_sort():
 		pars = bn.parents(X)
 		if X in e:
-			w *= bn.P(X, e, bn.parents(X))
+			w *= bn.P(X, e, pars)
 		else:
 			for var in pars:
 				randvar = randint(0,len(bn.vars_dict[var])-1)
 				e[var] = bn.vars_dict[var][randvar]
 			randvar = randint(0,len(bn.vars_dict[X])-1)
 			e[X] = bn.vars_dict[X][randvar]
-			event.append(bn.P(X, e, bn.parents(X)))
+			event.append(bn.P(X, e, pars))
 	return event, w
 
 #returns the normalized distribution of P(X | e)

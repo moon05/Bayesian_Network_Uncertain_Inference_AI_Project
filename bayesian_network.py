@@ -9,6 +9,12 @@ def P(var, e, givens):
 		vals.append(e[element])
 	return defs_dict[(var, givens)][tuple(vals)][index]
 
+def P_mb(var, e):
+	value = 1.0
+	for child in children(var):
+		value *= P(child, e, parents(child))
+	return P(var, e, parents(var)) * value / alpha
+
 #returns an graph representation of the bayesian network
 def get_graph():
 	graph = {}
@@ -46,8 +52,7 @@ def mb(query):
 	return tuple(markov_blanket)
 
 #returns a list of variables in sorted topological order
-def topological_sort():
-	vars_list = vars_dict.keys()
+def topological_sort(vars_list):
 	order = []
 	i = 0
 	while i < len(vars_list):
