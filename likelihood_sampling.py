@@ -1,21 +1,18 @@
 from random import randint
 
 #returns the distribution with wieghts
-def weighted_sample(bn,e):
-	w = 1
-	event = list()
-	for X in bn.topological_sort():
-		pars = bn.parents(X)
-		if X in e:
-			w *= bn.P(X, e, pars)
+def weighted_sample(bn, e):
+	w = 1.0
+	x = []
+	e_p = e.copy()
+	for Xi in bn.topological_sort():
+		if Xi in e:
+			w *= bn.P(Xi, e[Xi], e_p, bn.parents(Xi))
+			x.append(e[Xi])
 		else:
-			for var in pars:
-				randvar = randint(0,len(bn.vars_dict[var])-1)
-				e[var] = bn.vars_dict[var][randvar]
-			randvar = randint(0,len(bn.vars_dict[X])-1)
-			e[X] = bn.vars_dict[X][randvar]
-			event.append(bn.P(X, e, pars))
-	return event, w
+			e_p[Xi] = bn.vars_dict[Xi][randint(0, len(bn.vars_dict[Xi])-1)]
+			x.append(e_p[Xi])
+	return x, w
 
 #returns the normalized distribution of P(X | e)
 def likelihood(X, e, bn, NSample):
@@ -23,13 +20,11 @@ def likelihood(X, e, bn, NSample):
 
 	parents_of_X = bn.parents(X)
 	def_dict = bn.defs_dict[(X, parents_of_X)]
+	index = bn.topological_sort().index(X)
 
 	for j in range(NSample):
-		event, w = weighted_sample(bn,e)
-		for n in def_dict:
-			for i in range(len(def_dict[n])):
-				if def_dict[n][i] in event:
-					W[i] += 1
+		x, w = weighted_sample(bn, e)
+		W[bn.vars_dict[X].index(x[index])] += w
 	return bn.normalize(W)
 
 #parse the input and run the algorithm

@@ -1,7 +1,7 @@
 # returns the distribution over x
 def enumeration_ask(X, e, bn):
 	Q_X = []
-	vars_list = bn.topological_sort(bn.vars_dict.keys())
+	vars_list = bn.topological_sort()
 	for x in bn.vars_dict[X]:
 		e[X] = x
 		Q_X.append(enumeration_all(bn, vars_list, e))
@@ -15,12 +15,12 @@ def enumeration_all(bn, vars_list, e):
 
 	Y = vars_list[0]
 	if Y in e:
-		return bn.P(Y, e, bn.parents(Y)) * enumeration_all(bn, vars_list[1:], e)
+		return bn.P(Y, e[Y], e, bn.parents(Y)) * enumeration_all(bn, vars_list[1:], e)
 	else:
 		sum = 0.0
-		for i in range(len(bn.vars_dict[Y])):
-			e[Y] = bn.vars_dict[Y][i]
-			sum += bn.P(Y, e, bn.parents(Y)) * enumeration_all(bn, vars_list[1:], e)
+		for y in bn.vars_dict[Y]:
+			e[Y] = y
+			sum += bn.P(Y, y, e, bn.parents(Y)) * enumeration_all(bn, vars_list[1:], e)
 		del e[Y]
 		return sum
 

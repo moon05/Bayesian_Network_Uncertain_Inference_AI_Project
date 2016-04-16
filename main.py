@@ -36,6 +36,7 @@ if option not in inference_algorithms:
 
 #determines which parser should be used based on the file extension
 filename, file_ext = os.path.splitext(sys.argv[2])
+print file_ext
 if file_ext == ".xml":
 	result = xmlparser.parse(filename + file_ext)
 elif file_ext == ".bif":

@@ -36,20 +36,32 @@ def gibbs_ask(X, e, bn, NSample):
 	for var in bn.vars_dict:
 		if var not in e:
 			Z[var] = bn.vars_dict[var][0]
+	Z_topsort = []
+	for var in bn.topological_sort():
+		if var in Z:
+			Z_topsort.append(var)
 	for j in range(NSample):
-		for Zi in bn.topological_sort(Z.keys()):
-			x = []
-			for i in range(len(bn.vars_dict[Zi])):
-				e[Zi] = bn.vars_dict[Zi][i]
-				x[i] = bn.P_mb(Zi, e)
-			normalized = bn.normalized(x)
+		for Zi in Z_topsort:
+			x = {}
+			print "Zi: %s" % Zi
+			for val in bn.vars_dict[Zi]:
+				e[Zi] = val
+				print "Evidence: %s" % e
+				x[val] = bn.P_mb(Zi, e)
+			normalized = bn.normalized(x.values()).sort()
 			index = uniform(0.0, 1.0)
 			temp = 0.0
-			for i in range(len(normalized)):
-				if index in range(temp, normalized[i]+1):
-					index = i
-					break
+			val = None
+			for element in normalized:
+				if index in range(temp, element+1):
+					for key, value in x.iteritems():
+						if element == value:
+							val = key
+							break
+					if val is not None:
+						break
 				temp = normalized[i]
+			index = bn.vars_dict[Zi].index(val)
 			N[index] += 1
 	return bn.normalize(N)
 

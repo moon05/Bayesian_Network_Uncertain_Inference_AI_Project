@@ -2,13 +2,19 @@ vars_dict = {}
 defs_dict = {}
 
 #returns the probability of the query given a particular assignment
-def P(var, e, givens):
-	index = vars_dict[var].index(e[var])
+def P(var, val, e, givens):
+	#print "Var: %s, e: %s, givens: %s" % (var, e, givens)
+	index = vars_dict[var].index(val)
 	vals = []
 	for element in givens:
 		vals.append(e[element])
 	return defs_dict[(var, givens)][tuple(vals)][index]
 
+#returns the probability distribution for a query and its givens
+def P_dist(var, givens):
+	return defs_dict[(var, givens)].keys()
+	
+#returns the probability of the query given its markov blanket
 def P_mb(var, e):
 	value = 1.0
 	for child in children(var):
@@ -52,7 +58,8 @@ def mb(query):
 	return tuple(markov_blanket)
 
 #returns a list of variables in sorted topological order
-def topological_sort(vars_list):
+def topological_sort():
+	vars_list = vars_dict.keys()
 	order = []
 	i = 0
 	while i < len(vars_list):
